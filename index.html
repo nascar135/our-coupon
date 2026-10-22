@@ -379,7 +379,6 @@ async function saveCloudData() {
     coupons: state.couponDocs,
     memories: state.rawMemories
   };
-  // Save local backup immediately
   localStorage.setItem('sb_coupons', JSON.stringify(state.couponDocs));
   localStorage.setItem('sb_memories', JSON.stringify(state.rawMemories));
 
@@ -416,7 +415,6 @@ async function writeCoupon(id, patch) {
   rebuildCoupons();
   await saveCloudData();
 
-  // Silent Notification Integration (Discord & Formspree)
   if (patch.redeemed || patch.note) {
     const couponInfo = COUPONS_DATA.find(c => c.id === id);
     const couponTitle = couponInfo ? couponInfo.title : `Coupon #${id}`;
@@ -856,7 +854,8 @@ async function handleScrapbookSubmit(e) {
   const desc = document.getElementById('scrapbook-desc').value;
   const files = Array.from(document.getElementById('scrapbook-photos').files || []);
   const submitBtn = e.target.querySelector('button[type=submit]');
-  submitBtn.disabled = true; submitBtn.innerText = 'Saving...';
+  submitBtn.disabled = true; submitBtn.innerText = 'Saving photos...';
+
   try {
     const added = (await Promise.all(files.map(compressFile))).filter(Boolean);
     const existing = id ? state.rawMemories.find(m => m.id === id) : null;
@@ -873,9 +872,11 @@ async function handleScrapbookSubmit(e) {
     closeScrapbookModal();
     showToast(id ? 'Memory Updated!' : 'Memory Saved!');
 
-    await saveCloudData();
+    submitBtn.disabled = false; 
+    submitBtn.innerText = 'Save Memory';
 
-    // Scrapbook Notification Integration (Discord & Formspree)
+    saveCloudData().catch(err => console.log('Background cloud sync note:', err));
+
     const actionType = id ? 'Updated a memory' : 'Added a new memory';
     const scrapbookMsg = `📸 Partner ${actionType} in the Scrapbook: "${title}" (${date})!`;
 
@@ -892,9 +893,11 @@ async function handleScrapbookSubmit(e) {
     }).catch(err => console.log('Discord scrapbook note:', err));
 
   } catch (err) {
-    showToast('Couldn\'t save, please try again');
+    console.error(err);
+    showToast('Couldn\'t save photos, try fewer images at once');
+    submitBtn.disabled = false; 
+    submitBtn.innerText = 'Save Memory';
   }
-  submitBtn.disabled = false; submitBtn.innerText = 'Save Memory';
 }
 
 function renderLoveVault() {
