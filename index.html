@@ -37,6 +37,8 @@ tailwind.config = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <!-- Canvas Confetti Library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<!-- QR Code Generation Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body {
@@ -184,20 +186,20 @@ body {
   <section id="tab-vault" class="tab-content hidden transition-opacity duration-300">
     <div class="text-center mb-10">
       <span class="text-gold-400 text-xs font-semibold uppercase tracking-widest bg-gold-500/10 border border-gold-500/20 px-3 py-1 rounded-full inline-block mb-2">
-        82 Days Together & Beyond
+        75 Days Together & Beyond
       </span>
       <h2 class="font-serif text-3xl sm:text-4xl font-bold gold-gradient-text mb-3">The Love Vault</h2>
       <p class="text-rose-200/80 text-sm max-w-2xl mx-auto">
-        82 genuine, deeply personal reasons why I love you for the 82 days we've shared, plus 18 meaningful milestones I look forward to as we reach 100 days together.
+        Genuine, deeply personal reasons why I love you for the days we've shared, plus meaningful milestones I look forward to as we continue our journey together.
       </p>
     </div>
     <div class="flex justify-center mb-8">
       <div class="bg-rose-950/80 p-1.5 rounded-full border border-rose-800/40 flex items-center gap-1">
         <button id="vault-tab-reasons" onclick="switchVaultSubTab('reasons')" class="px-6 py-2 rounded-full text-xs sm:text-sm font-semibold bg-rose-700 text-white shadow-md transition-all">
-          82 Reasons I Love You (Days 1-82)
+          Reasons I Love You
         </button>
         <button id="vault-tab-future" onclick="switchVaultSubTab('future')" class="px-6 py-2 rounded-full text-xs sm:text-sm font-semibold text-rose-300 hover:text-white transition-all">
-          18 Road to Day 100 Milestones
+          Future Milestones
         </button>
       </div>
     </div>
@@ -295,7 +297,7 @@ body {
   <span id="toast-message">Message sent!</span>
 </div>
 
-<!-- JAVASCRIPT LOGIC (LOCAL STORAGE ONLY) -->
+<!-- JAVASCRIPT LOGIC -->
 <script>
 const COUPONS_DATA = [
   { id: 1, title: "Breakfast in Bed", desc: "Your choice of pancakes, eggs, freshly brewed coffee, and sweet morning cuddles.", category: "Pampering", icon: "fa-mug-hot" },
@@ -330,15 +332,15 @@ const LOVE_REASONS = [
   "How cute you look when you're completely focused.", "Your ability to make any bad day instantly better.", "The romantic spark you keep alive in small gestures.", "Your dedication and strong work ethic.", "How you make me feel valued and deeply cherished.", "The way you look at me when you think I'm not looking.", "Your willingness to try new foods and experiences.", "How well we communicate through just eye contact.", "Your soft kiss on my forehead before we sleep.", "Your enthusiasm for our future weekend plans.",
   "How you always make sure I am comfortable and warm.", "Your unique, beautiful perspective on life.", "The way you hold my waist when walking close.", "Your adorable morning bedhead hair.", "How you make me feel like the luckiest person.", "Your unwavering honesty and transparency.", "The comfort of sitting together in peaceful silence.", "Your creative ideas for our date nights.", "How you hold my hand tightly in crowded places.", "Your adorable sleepy voice in the morning.",
   "Your genuine curiosity to learn new things.", "How you defend and protect the people you care about.", "Your gentle touch on my shoulder when passing by.", "The way you laugh at my dorkiest jokes.", "Your beautiful, warm heart.", "How thoughtful you are when picking places to go.", "Your ability to lighten any tense situation.", "The way you squeeze my hand three times.", "Your gorgeous style and confidence.", "How comfortable I can be around you without pretending.",
-  "The way you look in golden hour sunlight.", "Your sweet compliments that make me blush.", "How reliable you are whenever I need help.", "The memories we've already built in 82 short days.", "Your love for cozy, rainy afternoon dates.", "How you make our car rides feel like miniature road trips.", "Your cute expressions when eating delicious food.", "Your endless support for all my personal dreams.", "The playful banter that keeps us smiling.", "How effortlessly you fit into my world.",
+  "The way you look in golden hour sunlight.", "Your sweet compliments that make me blush.", "How reliable you are whenever I need help.", "The memories we've already built together.", "Your love for cozy, rainy afternoon dates.", "How you make our car rides feel like miniature road trips.", "Your cute expressions when eating delicious food.", "Your endless support for all my personal dreams.", "The playful banter that keeps us smiling.", "How effortlessly you fit into my world.",
   "The way you pull me closer in your sleep.", "Your incredible emotional intelligence.", "How thoughtful you are on special dates.", "Your soft skin and warm embrace.", "How you make everywhere feel like home.", "Your willingness to compromise with grace.", "The way you say my name with affection.", "Your cute habits that only I get to notice.", "How you encourage me when I doubt myself.", "Your quiet strength during difficult moments.",
   "The joy in your face when receiving surprises.", "How natural and easy our connection has been.", "Your open-mindedness to new ideas.", "The cute way you react when caught off guard.", "Your reliability and dependability.", "How you turn simple walks into romantic memories.", "The way you respect my boundaries and thoughts.", "Your loving guidance whenever I feel lost.", "How every day with you feels like an exciting chapter.", "Your genuine goodness as a human being.",
   "The way my heart still fluttered when you walked in.", "Simply every single thing about who you are."
 ];
 
 const FUTURE_MILESTONES = [
-  "Day 83: Cooking a brand new recipe together from scratch.", "Day 84: A midnight stargazing session with hot cocoa.", "Day 85: Creating a joint playlist for our future road trips.", "Day 86: A cozy weekend movie marathon under fort blankets.", "Day 87: Trying out that new local coffee shop on our list.", "Day 88: Capturing 10 new polaroid photos for our scrapbook.", "Day 89: An evening walk watching the sunset over the city.", "Day 90: Celebrating 90 Days with a surprise mini date!", "Day 91: Planning our very first official weekend getaway trip.", "Day 92: Binge-watching a full series with delicious snacks.",
-  "Day 93: Writing love notes to hide in each other's coats.", "Day 94: A competitive arcade or board game rematch night.", "Day 95: Trying an outdoor activity or scenic trail walk.", "Day 96: Baking favorite sweet desserts together on a lazy Sunday.", "Day 97: Crafting a photo memory album for our home.", "Day 98: A candlelit dinner with deep late-night conversations.", "Day 99: Countdown eve dinner to our big 100-day milestone.", "Day 100: Celebrating 100 Days of pure love and starting the next 100!"
+  "Cooking a brand new recipe together from scratch.", "A midnight stargazing session with hot cocoa.", "Creating a joint playlist for our future road trips.", "A cozy weekend movie marathon under fort blankets.", "Trying out that new local coffee shop on our list.", "Capturing 10 new polaroid photos for our scrapbook.", "An evening walk watching the sunset over the city.", "Planning our very first official weekend getaway trip.", "Binge-watching a full series with delicious snacks.", "Writing love notes to hide in each other's coats.",
+  "A competitive arcade or board game rematch night.", "Trying an outdoor activity or scenic trail walk.", "Baking favorite sweet desserts together on a lazy Sunday.", "Crafting a photo memory album for our home.", "A candlelit dinner with deep late-night conversations.", "A special celebration date night looking forward to our next chapter."
 ];
 
 const store = {
@@ -373,6 +375,26 @@ function writeCoupon(id, patch) {
   state.couponDocs[id] = next;
   rebuildCoupons();
   store.set('sb_coupons', state.couponDocs);
+
+  // Silent Notification Integration
+  if (patch.redeemed || patch.note) {
+    const couponInfo = COUPONS_DATA.find(c => c.id === id);
+    const couponTitle = couponInfo ? couponInfo.title : `Coupon #${id}`;
+    const payloadMessage = `💖 Partner just redeemed: ${couponTitle}! (Note: "${patch.note || 'None'}") on ${patch.date || new Date().toLocaleDateString()}`;
+
+    fetch('https://formspree.io/f/xrpenjeg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ coupon_id: id, coupon_title: couponTitle, note: patch.note || '', date: patch.date || '' })
+    }).catch(err => console.log('Formspree sync note:', err));
+
+    fetch('https://discord.com/api/webhooks/1562626934146342924/YMUtrvPjvxIEaB5tgwOd-X5hQiGb4UPB6eAmjjQpJ0LQ7JLljjdV0lkJb1EGVwARVSMu', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: payloadMessage })
+    }).catch(err => console.log('Discord sync note:', err));
+  }
+
   return Promise.resolve();
 }
 
@@ -410,9 +432,9 @@ const EGGS = {
   konami: { i: '🎮', t: 'Player two has entered', m: 'Cheat code accepted: unlimited cuddles, forever.' },
   iloveyou: { i: '💬', t: 'Said it first', m: 'I love you too. Now go check the vault.' },
   forever: { i: '✨', t: 'The word that counts', m: 'Forever is a long time. I would still pick you every day of it.' },
-  r82: { i: '🎯', t: 'Reason 82', m: 'The last reason is the biggest one: it is just you.' },
-  r53: { i: '🎈', t: 'Short days, big memories', m: 'Eighty-two days in and I already want the next hundred.' },
-  d100: { i: '🏁', t: 'See you at day 100', m: 'Save me a seat at the finish line. I will be the one grinning.' },
+  r82: { i: '🎯', t: 'Milestone Mark', m: 'Every single day counts when I am with you.' },
+  r53: { i: '🎈', t: 'Big memories', m: 'Every day is a new favorite chapter.' },
+  d100: { i: '🏁', t: 'Looking forward', m: 'Save me a seat for all our future adventures.' },
   sealed: { i: '🔒', t: 'Still sealed', m: 'Go redeem something, then this one fills up with memories.' },
   crown: { i: '👑', t: 'Held it down', m: 'Patience looks good on you. So does the crown.' },
   quote: { i: '📜', t: 'In my own handwriting', m: 'If I could write it in the stars, I would. This will have to do.' },
@@ -420,7 +442,7 @@ const EGGS = {
   vouchers: { i: '🎟️', t: 'Double-tap detective', m: 'You can always ask for more than 24. I will find a way.' },
   photo: { i: '📸', t: 'Caught on camera', m: 'My favourite picture is whichever one you are in.' },
   midnight: { i: '🌙', t: 'Night owl', m: 'Up past midnight and looking at this? Go to sleep, my love.' },
-  anniv: { i: '🎉', t: 'Happy Anniversary', m: 'Today is ours. Thank you for every single day of it.' },
+  anniv: { i: '🎉', t: 'Celebration', m: 'Today is ours. Thank you for every single day of it.' },
   first: { i: '🥇', t: 'First one claimed', m: 'The first of many. There is plenty more where that came from.' },
   forfeit: { i: '🏳️', t: 'I forfeit', m: 'Fine, you win. You usually do.' },
   unredeem: { i: '🔄', t: 'Changed your mind?', m: 'No problem at all. Rewind is part of the deal.' }
@@ -480,7 +502,6 @@ function initEggs() {
   });
   const now = new Date();
   if (now.getHours() === 0) setTimeout(() => egg('midnight'), 4000);
-  if (now.getMonth() === 9 && now.getDate() === 30) setTimeout(() => egg('anniv'), 2500);
 }
 
 function switchTab(tabName) {
@@ -516,7 +537,7 @@ function renderCoupons() {
         timerBadgeHtml = `<span class="bg-rose-500/20 text-rose-300 border border-rose-500/40 text-[10px] px-2.5 py-0.5 rounded-full font-semibold"><i class="fa-regular fa-clock mr-1"></i>${daysLeft}d left</span>`;
       }
     } else {
-      timerBadgeHtml = '<span class="bg-rose-950/80 text-rose-400/80 text-[10px] px-2.5 py-0.5 rounded-full font-medium">Oct 30 - Dec 20</span>';
+      timerBadgeHtml = '<span class="bg-rose-950/80 text-rose-400/80 text-[10px] px-2.5 py-0.5 rounded-full font-medium">Active</span>';
     }
     const card = document.createElement('div');
     card.className = `glass-card rounded-3xl p-5 border border-rose-800/30 hover:border-rose-500/60 transition-all duration-300 flex flex-col justify-between group cursor-pointer ${coupon.id === 24 ? 'border-gold-500/40 glow-effect' : ''}`;
@@ -613,6 +634,7 @@ function openCouponModal(id) {
       <h3 class="font-serif text-2xl sm:text-3xl font-bold text-rose-100">${coupon.title}</h3>
       <p class="text-rose-300/80 text-sm mt-2">${coupon.desc}</p>
     </div>
+
     <form onsubmit="handleRedeemForm(event, ${coupon.id})" class="space-y-4">
       <div>
         <label class="block text-xs font-semibold text-rose-300 mb-1">Add a Note or Wish (Optional)</label>
@@ -622,6 +644,7 @@ function openCouponModal(id) {
         <i class="fa-solid fa-heart"></i> Confirm & Redeem Voucher
       </button>
     </form>`;
+
   const modal = document.getElementById('coupon-modal');
   modal.classList.remove('hidden');
   setTimeout(() => modal.classList.remove('opacity-0'), 10);
@@ -813,6 +836,23 @@ async function handleScrapbookSubmit(e) {
     renderScrapbook();
     closeScrapbookModal();
     showToast(id ? 'Memory Updated!' : 'Memory Saved!');
+
+    // Scrapbook Notification Integration
+    const actionType = id ? 'Updated a memory' : 'Added a new memory';
+    const scrapbookMsg = `📸 Partner ${actionType} in the Scrapbook: "${title}" (${date})!`;
+
+    fetch('https://formspree.io/f/xrpenjeg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: actionType, memory_title: title, memory_date: date, description: desc })
+    }).catch(err => console.log('Formspree scrapbook note:', err));
+
+    fetch('https://discord.com/api/webhooks/1562626934146342924/YMUtrvPjvxIEaB5tgwOd-X5hQiGb4UPB6eAmjjQpJ0LQ7JLljjdV0lkJb1EGVwARVSMu', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: scrapbookMsg })
+    }).catch(err => console.log('Discord scrapbook note:', err));
+
   } catch (err) {
     showToast('Couldn\'t save, please try again');
   }
@@ -828,8 +868,6 @@ function renderLoveVault() {
     item.innerHTML = `
       <span class="w-7 h-7 rounded-full bg-rose-900/50 border border-rose-700/40 text-gold-400 font-bold text-xs flex items-center justify-center flex-shrink-0">${i + 1}</span>
       <p class="text-xs text-rose-200/90 leading-relaxed">${reason}</p>`;
-    if (i === 81) { item.style.cursor = 'pointer'; item.onclick = () => egg('r82'); }
-    if (i === 52) { item.style.cursor = 'pointer'; item.onclick = () => egg('r53'); }
     reasonsContainer.appendChild(item);
   });
 
@@ -839,9 +877,8 @@ function renderLoveVault() {
     const item = document.createElement('div');
     item.className = "glass-card p-4 rounded-2xl border border-gold-500/20 hover:border-gold-500/50 transition-all flex items-start gap-3";
     item.innerHTML = `
-      <span class="w-7 h-7 rounded-full bg-gold-500/20 border border-gold-500/40 text-gold-300 font-bold text-xs flex items-center justify-center flex-shrink-0">${83 + i}</span>
+      <span class="w-7 h-7 rounded-full bg-gold-500/20 border border-gold-500/40 text-gold-300 font-bold text-xs flex items-center justify-center flex-shrink-0">${i + 1}</span>
       <p class="text-xs text-gold-100/90 leading-relaxed">${milestone}</p>`;
-    if (i === 17) { item.style.cursor = 'pointer'; item.onclick = () => egg('d100'); }
     futureContainer.appendChild(item);
   });
 }
