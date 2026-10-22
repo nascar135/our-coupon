@@ -37,8 +37,6 @@ tailwind.config = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <!-- Canvas Confetti Library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<!-- QR Code Generation Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body {
@@ -343,19 +341,61 @@ const FUTURE_MILESTONES = [
   "A competitive arcade or board game rematch night.", "Trying an outdoor activity or scenic trail walk.", "Baking favorite sweet desserts together on a lazy Sunday.", "Crafting a photo memory album for our home.", "A candlelit dinner with deep late-night conversations.", "A special celebration date night looking forward to our next chapter."
 ];
 
-const store = {
-  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
-};
+// JSONBIN CONFIGURATION
+const JSONBIN_BIN_ID = '6ad95f98ac6210605a477d20';
+const JSONBIN_API_KEY = '$2a$10$QyP/gukG8.YLUkwoXVkEiOv9C0k3uIV9k3boI3TGalmIZUs5QePvO';
 
 const state = {
-  rawMemories: store.get('sb_memories', []),
+  rawMemories: [],
   memories: [],
-  couponDocs: store.get('sb_coupons', {}),
+  couponDocs: {},
   couponTimers: {},
   redeemedCoupons: {},
-  eggs: store.get('sb_eggs', [])
+  eggs: JSON.parse(localStorage.getItem('sb_eggs') || '[]')
 };
+
+async function fetchCloudData() {
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+      headers: { 'X-Master-Key': JSONBIN_API_KEY }
+    });
+    if (res.ok) {
+      const json = await res.json();
+      const data = json.record || {};
+      state.couponDocs = data.coupons || {};
+      state.rawMemories = data.memories || [];
+    }
+  } catch (err) {
+    console.log('Using local fallback due to network error:', err);
+    state.couponDocs = JSON.parse(localStorage.getItem('sb_coupons') || '{}');
+    state.rawMemories = JSON.parse(localStorage.getItem('sb_memories') || '[]');
+  }
+  rebuildCoupons();
+  buildMemories();
+}
+
+async function saveCloudData() {
+  const payload = {
+    coupons: state.couponDocs,
+    memories: state.rawMemories
+  };
+  // Save local backup immediately
+  localStorage.setItem('sb_coupons', JSON.stringify(state.couponDocs));
+  localStorage.setItem('sb_memories', JSON.stringify(state.rawMemories));
+
+  try {
+    await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JSONBIN_API_KEY
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.log('Cloud sync error:', err);
+  }
+}
 
 function rebuildCoupons() {
   state.couponTimers = {};
@@ -370,13 +410,13 @@ function buildMemories() {
   state.memories = state.rawMemories;
 }
 
-function writeCoupon(id, patch) {
+async function writeCoupon(id, patch) {
   const next = {...(state.couponDocs[id] || {}), ...patch };
   state.couponDocs[id] = next;
   rebuildCoupons();
-  store.set('sb_coupons', state.couponDocs);
+  await saveCloudData();
 
-  // Silent Notification Integration
+  // Silent Notification Integration (Discord & Formspree)
   if (patch.redeemed || patch.note) {
     const couponInfo = COUPONS_DATA.find(c => c.id === id);
     const couponTitle = couponInfo ? couponInfo.title : `Coupon #${id}`;
@@ -394,17 +434,14 @@ function writeCoupon(id, patch) {
       body: JSON.stringify({ content: payloadMessage })
     }).catch(err => console.log('Discord sync note:', err));
   }
-
-  return Promise.resolve();
 }
 
 function saveEggs() {
-  store.set('sb_eggs', state.eggs);
+  localStorage.setItem('sb_eggs', JSON.stringify(state.eggs));
 }
 
-window.onload = function() {
-  rebuildCoupons();
-  buildMemories();
+window.onload = async function() {
+  await fetchCloudData();
   initGreeting();
   renderCoupons();
   renderRedeemedVault();
@@ -615,10 +652,11 @@ function getRemainingDays(startDateStr) {
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
-function openCouponModal(id) {
+async function openCouponModal(id) {
   if (id === 24) { openCoupon24Modal(); return; }
   if (!state.couponTimers[id]) {
-    writeCoupon(id, { opened: new Date().toISOString() }).then(renderCoupons);
+    await writeCoupon(id, { opened: new Date().toISOString() });
+    renderCoupons();
   }
   const coupon = COUPONS_DATA.find(c => c.id === id);
   if (!coupon) return;
@@ -829,15 +867,15 @@ async function handleScrapbookSubmit(e) {
     } else {
       state.rawMemories.unshift({ id: 'mem-' + Date.now(), title, date, category, video, desc, photos, created: Date.now() });
     }
-    if (!store.set('sb_memories', state.rawMemories)) {
-      showToast('This browser is out of storage space');
-    }
+    
     buildMemories();
     renderScrapbook();
     closeScrapbookModal();
     showToast(id ? 'Memory Updated!' : 'Memory Saved!');
 
-    // Scrapbook Notification Integration
+    await saveCloudData();
+
+    // Scrapbook Notification Integration (Discord & Formspree)
     const actionType = id ? 'Updated a memory' : 'Added a new memory';
     const scrapbookMsg = `📸 Partner ${actionType} in the Scrapbook: "${title}" (${date})!`;
 
