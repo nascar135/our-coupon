@@ -471,7 +471,7 @@ const EGGS = {
   crown: { i: '👑', t: 'Held it down', m: 'Patience looks good on you. So does the crown.' },
   quote: { i: '📜', t: 'In my own handwriting', m: 'If I could write it in the stars, I would. This will have to do.' },
   love: { i: '❤️', t: 'You tapped the word', m: 'Yes, it is made with love. All of it.' },
-  vouchers: { i: '🎟️', t: 'Double-tap detective', m: 'You can always ask for more than 24. I will find a way.' },
+  vouchers: { i: '🎟️', t: 'Double-tap detective', m: 'You can always ask for more than 25. I will find a way.' },
   photo: { i: '📸', t: 'Caught on camera', m: 'My favourite picture is whichever one you are in.' },
   midnight: { i: '🌙', t: 'Night owl', m: 'Up past midnight and looking at this? Go to sleep, my love.' },
   anniv: { i: '🎉', t: 'Celebration', m: 'Today is ours. Thank you for every single day of it.' },
@@ -495,7 +495,7 @@ function egg(id) {
   document.getElementById('egg-icon').innerText = done ? '🏆' : e.i;
   document.getElementById('egg-tag').innerText = done ? 'Every secret found' : (isNew ? 'A little secret' : 'Found again');
   document.getElementById('egg-title').innerText = done ? 'You found them all' : e.t;
-  document.getElementById('egg-msg').innerText = done ? 'Of course you did. You always notice the little things, and that is one more reason I love you.' : e.m;
+  document.getElementById('egg-msg').innerText = done ? 'Of course you did. You always notice the little things, and that is one more reason why I love you.' : e.m;
   const modal = document.getElementById('egg-modal');
   modal.classList.remove('hidden');
   setTimeout(() => modal.classList.remove('opacity-0'), 10);
