@@ -235,7 +235,7 @@ body {
       <i class="fa-solid fa-crown text-3xl text-rose-950"></i>
     </div>
     <span class="text-gold-400 text-xs font-bold uppercase tracking-widest bg-gold-500/20 px-3 py-1 rounded-full border border-gold-500/30 inline-block mb-3">Coupon 24 · The Grand Finale</span>
-    <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Will You Be My Boyfriend?</h3>
+    <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-3"> Be My Boyfriend?</h3>
     <p class="text-rose-200/90 text-sm leading-relaxed mb-6">This coupon never expires. No timers, no rules, no conditions. Just a question from my heart to yours.</p>
     <div class="p-4 bg-rose-950/60 border border-rose-800/40 rounded-2xl mb-6">
       <p onclick="egg('quote')" class="font-handwriting text-2xl text-gold-300 cursor-default">"Forever and Always, in every universe."</p>
@@ -298,47 +298,43 @@ body {
 <!-- JAVASCRIPT LOGIC -->
 <script>
 const COUPONS_DATA = [
-  { id: 1, title: "Breakfast together", desc: "Your choice of pancakes, eggs, freshly brewed coffee, and sweet morning cuddles.", category: "Pampering", icon: "fa-mug-hot" },
+  { id: 1, title: "Breakfast together", desc: "Your choice of pancakes, eggs, hot or iced coffee, and morning cuddles.", category: "Pampering", icon: "fa-mug-hot" },
   { id: 2, title: "Movie Night Pick", desc: "You get full control of the remote, popcorn selection, and snacks without debate.", category: "Entertainment", icon: "fa-film" },
   { id: 3, title: "Ask Me Anything", desc: "Ask me whatever you want and I will answer truthfully.", category: "Connection", icon: "fa-spa" },
   { id: 4, title: "Homemade Chef Special", desc: "I cook your favorite absolute dream meal from scratch, complete with dessert.", category: "Food", icon: "fa-utensils" },
   { id: 5, title: "Late Night Drive & Slushies", desc: "Cruising with your favorite playlist running, late-night chats, and cold drinks.", category: "Adventure", icon: "fa-car" },
   { id: 6, title: "Guilt-Free Lazy Day", desc: "Zero chores, zero obligations. You get to rest all day while I handle everything.", category: "Relaxation", icon: "fa-bed" },
-  { id: 7, title: "Ice Cream Date on Me", desc: "Any ice cream shop, any toppings, double scoop guaranteed whenever you crave it.", category: "Sweet", icon: "fa-ice-cream" },
+  { id: 7, title: "Meet a friend", desc: "'you are the sum of who you surround yourself with'. Come meet the people who make me; me.", category: "Sweet", icon: "fa-ice-cream" },
   { id: 8, title: "Win Any Argument Instant Pass", desc: "Show this coupon and I forfeit instantly with a kiss. Valid once per debate!", category: "Fun", icon: "fa-gavel" },
-  { id: 9, title: "Picnic in the Park", desc: "A cozy outdoor picnic setup with snacks, blankets, and sunny relaxing vibes.", category: "Outdoors", icon: "fa-tree" },
-  { id: 10, title: "Custom Dessert Craving", desc: "Name any baked good or sweet treat and I will make or buy it for you within 24h.", category: "Sweet", icon: "fa-cookie-bite" },
+  { id: 9, title: "Day with me", desc: "A day just for us, what would you like to do?", category: "Outdoors", icon: "fa-tree" },
+  { id: 10, title: "Custom Dessert Craving", desc: "Name any baked good or savoury treat and I will make or buy it for you within 24h.", category: "Sweet", icon: "fa-cookie-bite" },
   { id: 11, title: "Stargazing & Hot Cocoa", desc: "Wrapped up in warm blankets under the nighttime stars with rich cocoa.", category: "Romance", icon: "fa-star" },
   { id: 12, title: "Board Game / Arcade Night", desc: "A competitive date night playing your favorite arcades or board games.", category: "Fun", icon: "fa-gamepad" },
-  { id: 13, title: "30-Min Full Head & Shoulder Massage", desc: "Deep relaxing tension release dedicated purely to helping you unwind.", category: "Pampering", icon: "fa-hands" },
+  { id: 13, title: "30-Min Full Massage", desc: "Deep relaxing tension release dedicated purely to helping you unwind.", category: "Pampering", icon: "fa-hands" },
   { id: 14, title: "Bookstore Date & Pick", desc: "We visit a bookstore together and I buy you whichever book captures your eye.", category: "Date", icon: "fa-book" },
   { id: 15, title: "Surprise Gift Pass", desc: "Redeem for a thoughtfully picked mystery surprise gift delivered straight to you.", category: "Surprise", icon: "fa-gift" },
   { id: 16, title: "Sunset Watch Party", desc: "Finding the prettiest vantage point to watch the golden hour sunset together.", category: "Romance", icon: "fa-sun" },
-  { id: 17, title: "Coffee & Pastry Delivery", desc: "Your favorite local coffee order brought right to your door or bed.", category: "Pampering", icon: "fa-coffee" },
-  { id: 18, title: "Cozy Blanket Fort Night", desc: "Building an elaborate living room fort complete with fairy lights and snacks.", category: "Cozy", icon: "fa-house-user" },
-  { id: 19, title: "Explore a New City/Town", desc: "A day trip adventure exploring cute shops and coffee spots in a new town.", category: "Adventure", icon: "fa-map-location-dot" },
+  { id: 17, title: "Weekend getaway", desc: "As fun as Ottawa is, let's go away. Where would you like to go?", category: "Pampering", icon: "fa-coffee" },
+  { id: 18, title: "Cozy Blanket Fort Night", desc: "Building an elaborate living  fort complete with lights and snacks.", category: "Cozy", icon: "fa-house-user" },
+  { id: 19, title: "Explore a New City/Town", desc: "A day trip adventure exploring cute shops and spots in a new town.", category: "Adventure", icon: "fa-map-location-dot" },
   { id: 20, title: "One Household Chore Skip", desc: "Hand me any task you don't feel like doing today and consider it done.", category: "Help", icon: "fa-broom" },
-  { id: 21, title: "Museum / Gallery Visit", desc: "An inspiring afternoon strolling through an art gallery or history museum.", category: "Culture", icon: "fa-landmark" },
+  { id: 21, title: "Get to know me", desc: "A free pass to get to know anything about me, no deflecting.", category: "Culture", icon: "fa-landmark" },
   { id: 22, title: "Candlelight Dinner at Home", desc: "Soft music, dimmed lights, fancy table setting, and a romantic atmosphere.", category: "Romance", icon: "fa-wine-glass" },
   { id: 23, title: "Unlimited Cuddle Session", desc: "No phone distractions, just uninterrupted warm cuddles for as long as you want.", category: "Love", icon: "fa-heart" },
-  { id: 24, title: "Forever & Always (Grand Finale)", desc: "Valid Oct 30 to Forever. Asking the ultimate question for our future together.", category: "Forever", icon: "fa-crown" }
+  { id: 24, title: "Forever & Always (Grand Finale)", desc: "Valid Oct 22 to Forever. Asking the ultimate question for our future together.", category: "Forever", icon: "fa-crown" }
 ];
 
 const LOVE_REASONS = [
-  "The comforting feeling of holding your hand.", "The way your eyes crinkle when you laugh deeply.", "How you make even mundane grocery store runs fun.", "Your thoughtful kindness toward everyone around you.", "The gentle way you greet me every single morning.", "Your incredible music taste that expands my playlist.", "How warm and cozy your hugs feel on cold days.", "Your passion when talking about things you love.", "The way you remember tiny details about my preferences.", "How silly and playful we can be together.",
-  "Your reassuring smile when I feel stressed.", "The way you listen with complete undivided attention.", "How safe I feel when I am wrapped in your arms.", "Your infectious sense of humor that makes me wheeze.", "The sweet random text messages you send me.", "How good you smell every time we cuddle.", "Your patience when explaining things to me.", "The calm, soothing tone of your voice at night.", "Your effortless charm and genuine warmth.", "The way you celebrate my small victories like huge wins.",
-  "How cute you look when you're completely focused.", "Your ability to make any bad day instantly better.", "The romantic spark you keep alive in small gestures.", "Your dedication and strong work ethic.", "How you make me feel valued and deeply cherished.", "The way you look at me when you think I'm not looking.", "Your willingness to try new foods and experiences.", "How well we communicate through just eye contact.", "Your soft kiss on my forehead before we sleep.", "Your enthusiasm for our future weekend plans.",
-  "How you always make sure I am comfortable and warm.", "Your unique, beautiful perspective on life.", "The way you hold my waist when walking close.", "Your adorable morning bedhead hair.", "How you make me feel like the luckiest person.", "Your unwavering honesty and transparency.", "The comfort of sitting together in peaceful silence.", "Your creative ideas for our date nights.", "How you hold my hand tightly in crowded places.", "Your adorable sleepy voice in the morning.",
-  "Your genuine curiosity to learn new things.", "How you defend and protect the people you care about.", "Your gentle touch on my shoulder when passing by.", "The way you laugh at my dorkiest jokes.", "Your beautiful, warm heart.", "How thoughtful you are when picking places to go.", "Your ability to lighten any tense situation.", "The way you squeeze my hand three times.", "Your gorgeous style and confidence.", "How comfortable I can be around you without pretending.",
-  "The way you look in golden hour sunlight.", "Your sweet compliments that make me blush.", "How reliable you are whenever I need help.", "The memories we've already built together.", "Your love for cozy, rainy afternoon dates.", "How you make our car rides feel like miniature road trips.", "Your cute expressions when eating delicious food.", "Your endless support for all my personal dreams.", "The playful banter that keeps us smiling.", "How effortlessly you fit into my world.",
-  "The way you pull me closer in your sleep.", "Your incredible emotional intelligence.", "How thoughtful you are on special dates.", "Your soft skin and warm embrace.", "How you make everywhere feel like home.", "Your willingness to compromise with grace.", "The way you say my name with affection.", "Your cute habits that only I get to notice.", "How you encourage me when I doubt myself.", "Your quiet strength during difficult moments.",
-  "The joy in your face when receiving surprises.", "How natural and easy our connection has been.", "Your open-mindedness to new ideas.", "The cute way you react when caught off guard.", "Your reliability and dependability.", "How you turn simple walks into romantic memories.", "The way you respect my boundaries and thoughts.", "Your loving guidance whenever I feel lost.", "How every day with you feels like an exciting chapter.", "Your genuine goodness as a human being.",
+  "The comforting feeling of holding your hand.", "The way your eyes crinkle when you laugh.", "How you make even mundane grocery store runs fun.", "Your thoughtful kindness toward everyone around you.", "The way you greet me every morning.", "Your incredible music taste that WILL expand my playlist.", "How warm and cozy your hugs feel on cold days.", "Your passion when talking about things you love.", "The way you remember tiny details about my preferences.", "How silly and playful we can be together.",
+  "Your reassuring smile when I feel stressed.", "The way you listen with complete undivided attention.", "How safe I feel when I am wrapped in your arms.", "Your sense of humor.", "The sweet random text messages you send me.", "How good you smell every time we cuddle.", "Your patience when explaining things to me.", "The calm, soothing tone of your voice at night.", "Your effortless charm and genuine warmth.", "The way you celebrate my small victories like huge wins.",
+  "How cute you look when you're completely focused.", "Your ability to make any bad day instantly better.", "The romantic spark you keep alive in small gestures.", "Your dedication and strong work ethic.", "How you make me feel valued and deeply cherished.", "The way you look at me when you think I'm not looking.", "Your willingness to try new things and experiences.", "Your continous patiences and effort with us.", "Your soft kiss on my forehead before we sleep.", "Your enthusiasm for our future plans.",
+  "How you always make sure I am comfortable and warm.", "Your unique, beautiful perspective on life.", "Your  dedicatation and termination in your goals.", "Your adorable morning bedhead hair.", "How you make me feel like the luckiest person.", "Your honesty and transparency.", "The comfort of sitting together in peaceful silence.", "Your creativity.", "How you hold my hand tightly in crowded places.", "Your adorable sleepy voice in the morning.",
+  "Your curiosity to learn new things.", "How you defend and protect the people you care about.", "The look in your eyes when you see me.", "The way you laugh at my dorkiest jokes.", "Your beautiful, warm heart.", "How thoughtful you are.", "Your ability to lighten any tense situation (with me).", "Your gorgeous style and confidence.", "How comfortable I can be around you without pretending.", "The way you look in golden hour sunlight.", "Your sweet compliments that make me blush.", "How reliable you are whenever I need help.", "The memories we've already built together.", "Your cute expressions when eating delicious food.", "Your endless support for all my personal dreams.", "The playful banter that keeps us smiling.", "The way you pull me closer in your sleep.", "Your incredible emotional intelligence.", "How you make everywhere feel like home.", "Your willingness to compromise with grace.", "The way you say my name with affection.", "Your cute habits that only I get to notice.", "How you encourage me when I doubt myself.", "Your quiet strength during difficult moments.", "How natural and easy our connection has been.","The cute way you react when caught off guard.", "Your reliability and dependability.", "The way you respect my boundaries and thoughts.", "Your loving guidance whenever I feel lost.", "How every day with you feels like an exciting chapter.", "Your genuine goodness as a human being.",
   "The way my heart still fluttered when you walked in.", "Simply every single thing about who you are."
 ];
 
 const FUTURE_MILESTONES = [
-  "Cooking a brand new recipe together from scratch.", "A midnight stargazing session with hot cocoa.", "Creating a joint playlist for our future road trips.", "A cozy weekend movie marathon under fort blankets.", "Trying out that new local coffee shop on our list.", "Capturing 10 new polaroid photos for our scrapbook.", "An evening walk watching the sunset over the city.", "Planning our very first official weekend getaway trip.", "Binge-watching a full series with delicious snacks.", "Writing love notes to hide in each other's coats.",
-  "A competitive arcade or board game rematch night.", "Trying an outdoor activity or scenic trail walk.", "Baking favorite sweet desserts together on a lazy Sunday.", "Crafting a photo memory album for our home.", "A candlelit dinner with deep late-night conversations.", "A special celebration date night looking forward to our next chapter."
+  "Making a brand new recipe together from scratch.", "A midnight stargazing session with hot cocoa.", "Creating a joint playlist for our future road trips.", "A cozy weekend movie marathon.", "A taste of each others' culture.", "Capturing polaroid photos for our scrapbook.", "Travelling abroad.", "Planning our very first official weekend getaway trip.", "Binge-watching a full series with delicious snacks.", "Spending Christmas together.", "A competitive arcade or board game night.", "Trying an outdoor activity or scenic trail walk.", "Baking favorite desserts together on a lazy Sunday.", "Crafting a photo memory album for our home.", "A candlelit dinner with deep late-night conversations.", "A special celebration date night looking forward to our next chapter.", "Getting a pet together", "Retiring together and spending the rest of my lfie with you"
 ];
 
 // JSONBIN CONFIGURATION
@@ -418,7 +414,7 @@ async function writeCoupon(id, patch) {
   if (patch.redeemed || patch.note) {
     const couponInfo = COUPONS_DATA.find(c => c.id === id);
     const couponTitle = couponInfo ? couponInfo.title : `Coupon #${id}`;
-    const payloadMessage = `💖 Partner just redeemed: ${couponTitle}! (Note: "${patch.note || 'None'}") on ${patch.date || new Date().toLocaleDateString()}`;
+    const payloadMessage = `💖 Reve just redeemed: ${couponTitle}! (Note: "${patch.note || 'None'}") on ${patch.date || new Date().toLocaleDateString()}`;
 
     fetch('https://formspree.io/f/xrpenjeg', {
       method: 'POST',
@@ -461,7 +457,7 @@ function initGreeting() {
 
 const EGGS = {
   heart: { i: '💖', t: 'Right here the whole time', m: 'Every page in this book starts with you.' },
-  weather: { i: '❄️', t: 'Ottawa in the cold', m: 'Any weather is good weather when it is spent with you.' },
+  weather: { i: '❄️', t: 'Easter Egg #2', m: 'Any weather is good weather when it is spent with you.' },
   lock: { i: '🗝️', t: 'You found the key', m: 'You hold the key to all of it.' },
   title: { i: '📖', t: 'Chapter one, again', m: 'Tap the cover as many times as you like. The story keeps going.' },
   konami: { i: '🎮', t: 'Player two has entered', m: 'Cheat code accepted: unlimited cuddles, forever.' },
@@ -479,7 +475,7 @@ const EGGS = {
   midnight: { i: '🌙', t: 'Night owl', m: 'Up past midnight and looking at this? Go to sleep, my love.' },
   anniv: { i: '🎉', t: 'Celebration', m: 'Today is ours. Thank you for every single day of it.' },
   first: { i: '🥇', t: 'First one claimed', m: 'The first of many. There is plenty more where that came from.' },
-  forfeit: { i: '🏳️', t: 'I forfeit', m: 'Fine, you win. You usually do.' },
+  forfeit: { i: '🏳️', t: 'I give up', m: 'Fine, you win. You usually do.' },
   unredeem: { i: '🔄', t: 'Changed your mind?', m: 'No problem at all. Rewind is part of the deal.' }
 };
 
@@ -878,7 +874,7 @@ async function handleScrapbookSubmit(e) {
     saveCloudData().catch(err => console.log('Background cloud sync note:', err));
 
     const actionType = id ? 'Updated a memory' : 'Added a new memory';
-    const scrapbookMsg = `📸 Partner ${actionType} in the Scrapbook: "${title}" (${date})!`;
+    const scrapbookMsg = `📸 Reve ${actionType} in the Scrapbook: "${title}" (${date})!`;
 
     fetch('https://formspree.io/f/xrpenjeg', {
       method: 'POST',
